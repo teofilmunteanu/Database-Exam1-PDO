@@ -3,7 +3,7 @@
     $sql1="DROP PROCEDURE IF EXISTS GetNotes";
     $sql2="CREATE PROCEDURE GetNotes()
     BEGIN
-        SELECT * FROM notes;
+        SELECT * FROM notes JOIN notes_logs ON notes.id = notes_logs.noteId;
     END;";
     $stmt1=$con->prepare($sql1);
     $stmt2=$con->prepare($sql2);
@@ -52,6 +52,7 @@
                         <div class="card card-body">
                             <span class="side-stick"></span>
                             <h5 class="note-title text-truncate w-75 mb-0"><?php echo $res['title'];?><i class="point fa fa-circle ml-1 font-10"></i></h5>
+                            <p class="note-date font-12 text-muted"><?php echo $res['updateTime']?></p>
                             <div class="note-content">
                                 <p class="note-inner-content text-muted"><?php echo $res['text'];?></p>
                             </div>

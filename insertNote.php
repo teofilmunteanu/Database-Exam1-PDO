@@ -29,7 +29,7 @@ $category='All';
     $sql3="DROP TRIGGER IF EXISTS InsertTrigger";
     $sql4="CREATE TRIGGER InsertTrigger AFTER INSERT ON notes FOR EACH ROW
         BEGIN
-        INSERT INTO notes_logs(title,text,status,updateTime) VALUES(NEW.title,NEW.text,'INSERTED',NOW());
+        INSERT INTO notes_logs(noteId, title,text,status,updateTime) VALUES(NEW.id, NEW.title,NEW.text,'INSERTED',NOW());
         END;";
     $stmt3=$con->prepare($sql3);
     $stmt3->execute();
