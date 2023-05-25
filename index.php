@@ -61,8 +61,10 @@
                                 <p class="note-inner-content text-muted"><?php echo $res['text'];?></p>
                             </div>
                             <div class="d-flex align-items-center">
-                                <span class="mr-1"><i class="fa fa-star favourite-note"></i></span>
-                                <span class="mr-1"><i class="fa fa-trash remove-note"></i></span>
+                                <form action="deleteNote.php" method="post" class="mr-1">
+                                    <input type="hidden" name="id" value="<?php echo $res['id']; ?>">
+                                    <button type="submit"><i class="fa fa-trash"></i></button>
+                                </form>
                                 <div class="ml-auto"> 
                                     <form id="myForm" action="updateCategory.php" method="post">
                                         <input type="hidden" name="id" value="<?php echo $res['id']; ?>">
@@ -94,20 +96,20 @@
                         <div class="modal-body">
                             <div class="notes-box">
                                 <div class="notes-content">
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="note-title">
-                                                    <label>Note Title</label>
-                                                    <input type="text" name="title" id="note-has-title" class="form-control" placeholder="Title"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="note-description">
-                                                    <label>Note Description</label>
-                                                    <textarea id="note-has-description" name="description" class="form-control" placeholder="Description" rows="3"></textarea>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <div class="note-title">
+                                                <label>Note Title</label>
+                                                <input type="text" name="title" id="note-has-title" class="form-control" placeholder="Title"/>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="note-description">
+                                                <label>Note Description</label>
+                                                <textarea id="note-has-description" name="description" class="form-control" placeholder="Description" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
