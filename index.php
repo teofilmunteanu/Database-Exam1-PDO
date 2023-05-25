@@ -3,7 +3,7 @@
     $sql1="DROP PROCEDURE IF EXISTS GetNotes";
     $sql2="CREATE PROCEDURE GetNotes()
     BEGIN
-        SELECT * FROM notes JOIN notes_logs ON notes.id = notes_logs.noteId;
+        SELECT * FROM notes INNER JOIN notes_logs ON notes.id = notes_logs.noteId;
     END;";
     $stmt1=$con->prepare($sql1);
     $stmt2=$con->prepare($sql2);
@@ -58,12 +58,12 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <form action="deleteNote.php" method="post" class="mr-1">
-                                    <input type="hidden" name="id" value="<?php echo $res['id']; ?>">
+                                    <input type="hidden" name="id" value="<?php echo $res['noteId']; ?>">
                                     <button type="submit"><i class="fa fa-trash"></i></button>
                                 </form>
                                 <div class="ml-auto"> 
                                     <form id="myForm" action="updateCategory.php" method="post">
-                                        <input type="hidden" name="id" value="<?php echo $res['id']; ?>">
+                                        <input type="hidden" name="id" value="<?php echo $res['noteId']; ?>">
                                         <select name="categories" onchange="this.form.submit()">
                                             <option value="All">All</option>
                                             <option value="note-important" <?php if($res['category'] == "note-important"){ echo "selected";}?>>Important</option>

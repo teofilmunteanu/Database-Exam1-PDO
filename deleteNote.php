@@ -15,7 +15,7 @@ $stmt2->execute();
 $sql3="DROP TRIGGER IF EXISTS DeleteTrigger";
 $sql4="CREATE TRIGGER DeleteTrigger BEFORE DELETE ON notes FOR EACH ROW
     BEGIN
-    INSERT INTO notes_logs(title,text,status,updateTime)VALUES(OLD.title,OLD.text,'DELETED',NOW());
+    INSERT INTO notes_logs(noteId,title,text,status,updateTime) VALUES(OLD.id,OLD.title,OLD.text,'DELETED',NOW());
     END;";
 $stmt3=$con->prepare($sql3);
 $stmt3->execute();
