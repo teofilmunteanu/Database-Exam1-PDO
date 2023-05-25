@@ -1,7 +1,7 @@
 <?php //SAME THING AS insert, BUT MORE SECURE
 require_once 'connection.php';
-$sql1="DROP PROCEDURE IF EXISTS insertProcedure";
-$sql2="CREATE PROCEDURE insertProcedure(
+$sql1="DROP PROCEDURE IF EXISTS InsertProcedure";
+$sql2="CREATE PROCEDURE InsertProcedure(
     IN strTitle varchar(30),
     IN strText varchar(300),
     IN strCategory varchar(30)
@@ -21,11 +21,10 @@ $stmt2=$con->prepare($sql2);
 $stmt1->execute();
 $stmt2->execute();
 
-$title='note1';
-$text='textttt';
-$category='cat1';
+$title=$_POST['title'];
+$text=$_POST['description'];
+$category='';
 
-//where to use trigger?? I can already set date at insert(I think)
 ///////////////
 //$sql30="DROP TRIGGER IF EXISTS MysqlTrigger3";
 //$sql3="CREATE TRIGGER MysqlTrigger3 BEFORE INSERT ON flori FOR EACH ROW
@@ -38,13 +37,13 @@ $category='cat1';
 //$stmt30->execute();        
 ////////////////////////////////////////
 
-$sqlInsert="CALL insertProcedure('{$title}','{$text}','{$category}')";
+$sqlInsert="CALL InsertProcedure('{$title}','{$text}','{$category}')";
 $q=$con->query($sqlInsert);
 if($q){
-    echo "Success";
+    header('location: index.php');
 }
 else{
-    echo "Nope";
+    echo "There was an error.";
 }
 ?>
 <br/><br/>
