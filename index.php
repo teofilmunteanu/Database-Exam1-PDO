@@ -8,16 +8,12 @@
     $stmt1=$con->prepare($sql1);
     $stmt2=$con->prepare($sql2);
     $stmt1->execute();
-    $stmt2->execute();
+    $stmt2->execute(); 
     
     $sqlGet='CALL GetNotes()';
+
     $q=$con->query($sqlGet);
     $q->setFetchMode(PDO::FETCH_ASSOC);
-    
-    
-    if (isset($_POST['myButton'])) {
-        echo "Bruh";
-    }
 ?>
 
 <head>
@@ -56,7 +52,6 @@
                         <div class="card card-body">
                             <span class="side-stick"></span>
                             <h5 class="note-title text-truncate w-75 mb-0"><?php echo $res['title'];?><i class="point fa fa-circle ml-1 font-10"></i></h5>
-                            <p class="note-date font-12 text-muted">01 April 2002</p>
                             <div class="note-content">
                                 <p class="note-inner-content text-muted"><?php echo $res['text'];?></p>
                             </div>

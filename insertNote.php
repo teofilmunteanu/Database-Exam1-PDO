@@ -23,19 +23,19 @@ $stmt2->execute();
 
 $title=$_POST['title'];
 $text=$_POST['description'];
-$category='';
+$category='All';
 
-///////////////
-//$sql30="DROP TRIGGER IF EXISTS MysqlTrigger3";
-//$sql3="CREATE TRIGGER MysqlTrigger3 BEFORE INSERT ON flori FOR EACH ROW
-//    BEGIN
-//    INSERT INTO flower_update(nume,status,edtime) VALUES(NEW.nume,'INSERTED',NOW());
-//    END;";
-//$stmt3=$con->prepare($sql3);
-//$stmt3->execute();
-//$stmt30=$con->prepare($sql30);
-//$stmt30->execute();        
-////////////////////////////////////////
+/////////////
+    $sql3="DROP TRIGGER IF EXISTS InsertTrigger";
+    $sql4="CREATE TRIGGER InsertTrigger AFTER INSERT ON notes FOR EACH ROW
+        BEGIN
+        INSERT INTO notes_logs(title,text,status,updateTime) VALUES(NEW.title,NEW.text,'INSERTED',NOW());
+        END;";
+    $stmt3=$con->prepare($sql3);
+    $stmt3->execute();
+    $stmt4=$con->prepare($sql4);
+    $stmt4->execute();    
+//////////////////////////////////////
 
 $sqlInsert="CALL InsertProcedure('{$title}','{$text}','{$category}')";
 $q=$con->query($sqlInsert);

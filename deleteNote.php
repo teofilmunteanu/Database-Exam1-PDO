@@ -12,16 +12,15 @@ $stmt2=$con->prepare($sql2);
 $stmt1->execute();
 $stmt2->execute();
 /////////////////////////////////////////////
-//punem un trigger in care sa scriem nume, data si ora (ca la update)
-//$sql3="DROP TRIGGER IF EXISTS MysqlTrigger4";
-//$sql4="CREATE TRIGGER MysqlTrigger4 BEFORE DELETE ON flori FOR EACH ROW
-//    BEGIN
-//    INSERT INTO flower_update(nume,status,edtime)VALUES(OLD.nume,'DELETED',NOW());
-//    END;";
-//$stmt3=$con->prepare($sql3);
-//$stmt3->execute();
-//$stmt4=$con->prepare($sql4);
-//$stmt4->execute();        
+$sql3="DROP TRIGGER IF EXISTS DeleteTrigger";
+$sql4="CREATE TRIGGER DeleteTrigger BEFORE DELETE ON notes FOR EACH ROW
+    BEGIN
+    INSERT INTO notes_logs(title,text,status,updateTime)VALUES(OLD.title,OLD.text,'DELETED',NOW());
+    END;";
+$stmt3=$con->prepare($sql3);
+$stmt3->execute();
+$stmt4=$con->prepare($sql4);
+$stmt4->execute();        
 ////////////////////////////////////////////
 $id=$_POST['id'];
 $sql="CALL DeleteNote('{$id}')" ;
